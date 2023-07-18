@@ -10,16 +10,14 @@ class DishesController {
       title,
       description,
       price,
-      category,
-      user_id
+      category
     });
 
      //Ingredientes sendo inseridos na tabela ingredientes em forma de objeto.
      const ingredientsInsert = ingredients.map(name => {
       return { 
         dish_id, 
-        name,
-        user_id
+        name
       }
     });
 
@@ -77,7 +75,8 @@ class DishesController {
 
   //Lista todos os pratos existentes
   async index (request, response) {
-    const { title, user_id, ingredients } = request.query;
+    const { title, ingredients } = request.query;
+
 
     let dishes;
 
@@ -91,25 +90,23 @@ class DishesController {
         "dishes.description",
         "dishes.photo",
         "dishes.price",
-        "dishes.category",
-        "dishes.user_id"
+        "dishes.category"
       ])
-      .where("dishes.user_id", user_id ) 
       .whereLike("dishes.title", `%${title}%`) 
       .whereIn("name", filterIngredients)
-      .innerJoin("dishes", "dishes.id", "ingredients.dish_id" ) 
+      .innerJoin("dishes", "dishes.id", "ingredients.dish_id" )
+      .groupBy("dishes.id") 
       .orderBy("dishes.title")
 
     } else {
       dishes = await knex("dishes")
-      .where({ user_id })
       .whereLike("title", `%${title}%`)
       .orderBy("title")
     }
 
-    const userIngredients = await knex("ingredients").where({ user_id }); 
+    const allIngredients = await knex("ingredients"); 
     const dishesWithIngredients = dishes.map(dish => {
-      const dishIngredients =  userIngredients.filter(ingredient => ingredient.dish_id === dish.id);
+      const dishIngredients =  allIngredients.filter(ingredient => ingredient.dish_id === dish.id);
       
       return {
         ...dish,

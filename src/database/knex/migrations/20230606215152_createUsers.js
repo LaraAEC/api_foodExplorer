@@ -4,7 +4,7 @@ exports.up = knex => knex.schema.createTable('users', table => {
   table.text("name").notNullable(); 
   table.text("email"); 
   table.text("password");
-  table.boolean("isAdmin").notNullable().default(false); 
+  table.boolean("isAdmin").default(false); 
 
 }); 
 
