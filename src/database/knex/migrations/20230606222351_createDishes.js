@@ -4,13 +4,10 @@ exports.up = knex => knex.schema.createTable('dishes', table => {
   table.text("title"); 
   table.text("description");
   table.text("photo").default(null); 
-  table.text("price").notNullable(); 
+  table.decimal("price", 6, 2); 
   table.text("category").notNullable();
 
   table.integer("user_id").references("id").inTable("users");
-
-  table.timestamp("created_at").default(knex.fn.now()); //campo tipo timestamp chamado de created_at, com padrão usando uma função do knex que dá o tempo atual
-  table.timestamp("updated_at").default(knex.fn.now()); //campo tipo timestamp chamado de updated_at, com padrão usando uma função do knex que dá o tempo atual
 }); 
 
 //DOWN - (comando migrations) processo de deletar a tabela, passo apenas o nome da tabela
