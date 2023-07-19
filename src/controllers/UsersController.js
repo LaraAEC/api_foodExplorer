@@ -4,7 +4,7 @@ const knex = require("../database/knex");
 
 class UsersController {
   async create(request, response) { //função para criar novo usuário
-    const { name, email, password, isAdmin } = request.body;
+    const { name, email, password } = request.body;
 
     const checkUserExists = await knex("users").where({ email: email}).first();
 
@@ -17,8 +17,7 @@ class UsersController {
     const [user_id] = await knex("users").insert({
       name,
       email,
-      password: hashedPassword,
-      isAdmin: isAdmin
+      password: hashedPassword
     });
 
     console.log(user_id);
@@ -27,9 +26,9 @@ class UsersController {
 
   async update(request, response) { //função para atualizar o usuário
     const { name, email, password, old_password } = request.body;
-    const { id } = request.params;
+    const user_id = request.user.id;
 
-    const user = await knex("users").where({ id: id}).first();
+    const user = await knex("users").where({ id:user_id }).first();
 
     if (!user) {
       throw new AppError("Usuário não encontrado");
@@ -60,7 +59,7 @@ class UsersController {
       user.password = await hash(password, 8); //usando hash pra criptografar o novo password.
     }
 
-    await knex("users").update(user).where({ id: id});
+    await knex("users").update(user).where({ id:user_id });
 
     return response.status(201).json();
 

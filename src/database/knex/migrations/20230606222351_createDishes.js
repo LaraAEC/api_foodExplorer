@@ -6,8 +6,6 @@ exports.up = knex => knex.schema.createTable('dishes', table => {
   table.text("photo").default(null); 
   table.decimal("price", 6, 2); 
   table.text("category").notNullable();
-
-  table.integer("user_id").references("id").inTable("users");
 }); 
 
 //DOWN - (comando migrations) processo de deletar a tabela, passo apenas o nome da tabela

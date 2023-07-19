@@ -4,8 +4,7 @@ class DishesController {
   //Cria os pratos
   async create (request, response) {
     const {title, description, ingredients, price, category} = request.body;
-    const { user_id } = request.params
-
+ 
     const [dish_id] = await knex("dishes").insert({
       title,
       description,
@@ -21,7 +20,7 @@ class DishesController {
       }
     });
 
-    await knex("ingredients").insert(ingredientsInsert); //Passando para minha tabela Tags, as tags inseridas; e será inserida essa informação.
+    await knex("ingredients").insert(ingredientsInsert); //Passando para minha tabela Ingredientes, os ingredientes inseridos.
 
     return response.json();
 
@@ -98,9 +97,13 @@ class DishesController {
       .groupBy("dishes.id") 
       .orderBy("dishes.title")
 
-    } else {
+    } else if(title) {
       dishes = await knex("dishes")
       .whereLike("title", `%${title}%`)
+      .orderBy("title")
+
+    } else {
+      dishes = await knex("dishes")
       .orderBy("title")
     }
 
