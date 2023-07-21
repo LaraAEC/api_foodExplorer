@@ -5,7 +5,7 @@ class FavoritesController{
   //Cria pratos favoritos
   async create (request, response) {
     const {dish_id} = request.query;
-    const {user_id} = request.params;
+    const user_id = request.user.id;
  
     const [favorite] = await knex("favorites").insert({
       dish_id,
@@ -18,13 +18,13 @@ class FavoritesController{
 
   //Mostra todos os pratos favoritados de um usuário
   async index (request, response) {
-    const { user_id } = request.params;
+    const user_id = request.user.id;
 
     const favorites = await knex("favorites")
     .where({ user_id }) 
     .groupBy("id")
 
-    return response.json();
+    return response.json(favorites);
   }
 
    //Retira o prato da lista de favoritos de um usuário

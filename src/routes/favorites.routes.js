@@ -2,13 +2,16 @@ const { Router } = require("express");
 
 const FavoritesController = require("../controllers/FavoritesController");
 
+const ensureAuthenticated = require("../middleware/ensureAuthenticated"); //import do middleware de autenticação
+
+
 const favoritesRoutes = Router();
 
 const favoritesController = new FavoritesController();
 
 
-favoritesRoutes.post("/:user_id", favoritesController.create); 
-favoritesRoutes.get("/:user_id", favoritesController.index);
+favoritesRoutes.post("/", ensureAuthenticated, favoritesController.create); 
+favoritesRoutes.get("/", ensureAuthenticated, favoritesController.index);
 favoritesRoutes.delete("/:id", favoritesController.delete);
 
 
