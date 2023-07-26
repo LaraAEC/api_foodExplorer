@@ -2,13 +2,20 @@ require("express-async-errors"); //importada antes de tudo,biblioteca que lida c
 
 const AppError = require("./utils/AppError");
 
-const express = require("express");
+const uploadConfig = require("./configs/upload");
 
+
+const cors = require("cors");
+const express = require("express");
 const routes = require("./routes");
 
-const app = express();
+const app = express(); //inicializando o express nessa outra constante, com os parênteses. Instanciando minha biblioteca super importante.
 
-app.use(express.json());
+app.use(cors()); //para que o backend se integre com o frontend
+
+app.use(express.json()); //colocando o express para usar json()
+
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER)); //buscando pelo que está dentro da pasta de uploads, na rota /files busco isso através do método static do express
 
 app.use(routes);
 
