@@ -1,19 +1,29 @@
 const knex = require("../database/knex");
+const DiskStorage = require("../providers/DiskStorage");
+
+const diskStorage = new DiskStorage();
 
 class DishesController {
   //Cria os pratos
   async create (request, response) {
-    const {title, description, ingredients, price, category} = request.body;
- 
+    const {title, description, price, category, ingredients} = request.body;
+    const { filename: photo } = request.file;
+
+    const filename = await diskStorage.saveFile(photo);
+    
+
     const [dish_id] = await knex("dishes").insert({
       title,
       description,
       price,
-      category
+      category,
+      photo: filename,
     });
 
+    const ingredientsArray = ingredients.split(",")
+
      //Ingredientes sendo inseridos na tabela ingredientes em forma de objeto.
-     const ingredientsInsert = ingredients.map(name => {
+     const ingredientsInsert = ingredientsArray.map(name => {
       return { 
         dish_id, 
         name

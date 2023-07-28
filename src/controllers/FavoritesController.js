@@ -27,7 +27,7 @@ class FavoritesController{
     return response.json(favorites);
   }
 
-   //Retira o prato da lista de favoritos de um usuário
+  //Retira o prato da lista de favoritos de um usuário
    async delete (request, response) {
     const { id } = request.params;
 
