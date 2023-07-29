@@ -20,7 +20,6 @@ class UsersController {
       password: hashedPassword
     });
 
-    console.log(user_id);
     return response.status(201).json();
   }
 
