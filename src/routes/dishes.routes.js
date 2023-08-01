@@ -5,23 +5,27 @@ const uploadConfig = require("../configs/upload"); // importando minhas configur
 
 const DishesController = require("../controllers/DishesController");
 
-const DishPhotoController = require("../controllers/DishPhotoController");
 
 const dishesRoutes = Router();
 
-//Inicializando o multer dentro de uma constante chamada upload
-const upload = multer(uploadConfig.MULTER); //A Biblioteca multer foi guardada na constante MULTER lá em seu arquivo de origem para que aqui pudéssemos selecionar outra biblioteca, se necessário, que também seria configurada lá em outra constante.
+const ensureAuthenticated = require("../middleware/ensureAuthenticated");
+
+const upload = multer(uploadConfig.MULTER);
 
 const dishesController = new DishesController();
 
-const dishPhotoController = new DishPhotoController();
+//const DishPhotoController = require("../controllers/DishPhotoController");
+//const dishPhotoController = new DishPhotoController();
 
+
+dishesRoutes.post("/", ensureAuthenticated, upload.single("photo"), dishesController.create);
+dishesRoutes.put("/:id", ensureAuthenticated, upload.single("photo"), dishesController.update);
 dishesRoutes.get("/", dishesController.index);
-dishesRoutes.post("/", upload.single("photo"), dishesController.create);
 dishesRoutes.get("/:id", dishesController.show);
-dishesRoutes.put("/:id", dishesController.update);
-dishesRoutes.delete("/:id", dishesController.delete);
-dishesRoutes.patch("/photo/:id", upload.single("photo"), dishPhotoController.update)
+dishesRoutes.delete("/:id", ensureAuthenticated, dishesController.delete);
+
+
+//dishesRoutes.patch("/photo/:id", upload.single("photo"), dishPhotoController.update)
 
 
 module.exports = dishesRoutes;

@@ -1,4 +1,6 @@
 const knex = require("../database/knex");
+const AppError = require('../utils/AppError');
+
 const DiskStorage = require("../providers/DiskStorage");
 
 const diskStorage = new DiskStorage();
@@ -55,12 +57,14 @@ class DishesController {
   async update (request, response) { 
     const { title, description, ingredients, price, category } = request.body;
     const { id } = request.params;
+    const { filename: avatar_dish } = request.file;
 
-    const dish = await knex("dishes").where({ id: id}).first();
+    const filename = await diskStorage.saveFile(avatar_dish);
+    const dish = await knex("dishes").where({ id }).first();
 
 
     if (!dish) {
-      throw new AppError("Prato não encontrado");
+      throw new AppError("Prato não encontrado.");
     }
 
     dish.title = title ?? dish.title;
@@ -68,10 +72,37 @@ class DishesController {
     dish.price = price ?? dish.price;
     dish.category = category ?? dish.category;
 
-    await knex("dishes").update(dish).where({ id: id});
+    dish.avatar_dish = filename ?? dish.avatar_dish;
+
+    await knex("dishes").where({ id: dish.id}).update({
+      title,
+      description,
+      price,
+      category,
+      avatar_dish: filename
+    });
+
+    await knex("ingredients").where({ dish_id: dish.id}).delete();
+
+    const ingredientsList = ingredients.split(",");
+
+    for (let i = 0; i < ingredientsList.length; i++) {
+        const ingredient = ingredientsList[i];
+
+        if (ingredient.id) {
+            await knex("ingredients")
+            .where({ id: ingredient.id })
+            .update({ name: ingredient });
+        } else {
+            await knex("ingredients").insert({
+                dish_id: dish.id,
+                name: ingredient
+            });
+        }
+    }
 
     return response.status(201).json();
-  }
+}
 
   //Deleta o prato selecionado
   async delete (request, response) {
@@ -101,7 +132,7 @@ class DishesController {
         "dishes.price",
         "dishes.category"
       ])
-      .whereLike("dishes.title", `%${title}%`) 
+      
       .whereIn("name", filterIngredients)
       .innerJoin("dishes", "dishes.id", "ingredients.dish_id" )
       .groupBy("dishes.id") 
@@ -127,7 +158,6 @@ class DishesController {
       }
     });
 
-    //AQUI AINDA PRECISO RETORNAR A PHOTO
 
     return response.json(dishesWithIngredients);
   }
