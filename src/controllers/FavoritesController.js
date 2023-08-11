@@ -55,7 +55,6 @@ class FavoritesController {
     return response.json(favorite);
   }
   
-
   async delete (request, response) {
     const { id } = request.params;
 

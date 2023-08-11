@@ -149,8 +149,6 @@ class DishesController {
       .orderBy("title")
     }
 
-    console.log(dishes)
-
     const fullIngredients = await knex("ingredients").select("*"); 
     const dishesWithIngredients = dishes.map(dish => {
       const dishIngredients =  fullIngredients.filter(ingredient => ingredient.dish_id === dish.id);
