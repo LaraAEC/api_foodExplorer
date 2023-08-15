@@ -4,7 +4,7 @@ const knex = require("../database/knex");
 class OrderItemsController {
   async create(request, response) { 
     const { amount, dish_id, price, total } = request.body;
-    const { order_id} = request.params;
+    const { order_id} = request.body;
 
    
 

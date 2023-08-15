@@ -12,7 +12,7 @@ class OrdersController {
         const formattedDate = saoPauloTime.format('DD/MM - HH:mm');
         
         if(!user_id) {
-            throw new AppError("Se conecte para poder comprar.")
+            throw new AppError("Usuário não logado.")
         }
 
         const [id] = await knex("orders").insert({ 
@@ -21,9 +21,7 @@ class OrdersController {
             updated_at: formattedDate
         });
         
-        return response.json({
-            id
-        });
+        return response.json({id});
     }
 
     async show(request, response) {
@@ -35,9 +33,11 @@ class OrdersController {
             "orders.created_at",
             "orders.user_id",
             "orders.status"
-        ]).innerJoin("orders", "orders.id", "order_items.order_id")
-        .where("orders.user_id", user_id).orderBy("created_at")
-        .groupBy("request_id");
+        ])
+        .innerJoin("orders", "orders.id", "order_items.order_id")
+        .where("orders.user_id", user_id)
+        .orderBy("created_at")
+        .groupBy("order_id");
 
         const orderWithItem = await Promise.all(orderAll.map(async order => {
             const items = await knex("order_items")
@@ -67,7 +67,8 @@ class OrdersController {
             "orders.user_id",
             "orders.status"
         ]).innerJoin("orders", "orders.id", "order_items.order_id")
-        .orderBy("created_at").groupBy("order_id");
+        .orderBy("created_at")
+        .groupBy("order_id");
 
         const orderWithItem = await Promise.all(orderAll.map(async order => {
             const items = await knex("order_items")
