@@ -2,22 +2,30 @@ const AppError = require("../utils/AppError");
 const knex = require("../database/knex");
 
 class OrderItemsController {
-  async create(request, response) { 
-    const { amount, dish_id, price, total } = request.body;
-    const { order_id} = request.body;
+  async create(request, response) {
+    const { items, order_id } = request.body;
 
-   
+    const orderAddress = await knex("orders").where({ id: order_id }).first();
 
-    const [ orderItem_id ] = await knex("order_items").insert({
-      order_id,
-      amount,
-      dish_id,
-      unit_price: price,
-      total_price: total
+    if(!orderAddress) {
+        throw new AppError("Número do pedido inexistente.")
+    }
+
+    const itemsToInsert = items.map(item => {
+        return {
+            amount: item.amount,
+            order_id,
+            dish_id: item.dish_id,
+            unit_price: item.unit_price,
+            total_price: item.total_price
+        }
     });
 
-    return response.status(201).json();
-  }
+    await knex("order_items").insert(itemsToInsert);
+
+    return response.json();
+}
+
 
 }
 
