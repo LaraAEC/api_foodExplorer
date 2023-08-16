@@ -25,7 +25,7 @@ class OrdersController {
     }
 
     async show(request, response) {
-        const user_id = request.user.id;
+        const user_id = request.params;
 
         const orderAll = await knex("order_items")
         .select([
@@ -59,7 +59,6 @@ class OrdersController {
     }
 
     async index(request, response) {
-
         const orderAll = await knex("order_items")
         .select([
             "orders.id",
@@ -73,7 +72,7 @@ class OrdersController {
         const orderWithItem = await Promise.all(orderAll.map(async order => {
             const items = await knex("order_items")
                 .select([
-                    "dishes.name as dish_name",
+                    "dishes.title as dish_title",
                     "order_items.amount",
                     "order_items.order_id"
                 ])

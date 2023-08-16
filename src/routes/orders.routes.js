@@ -9,7 +9,7 @@ const ordersController = new OrdersController();
 ordersRoutes.use(ensureAuthenticated);
 
 ordersRoutes.post("/", ordersController.create);
-ordersRoutes.get("/:user_id", ordersController.show);
+ordersRoutes.get("/:id", ordersController.show);
 ordersRoutes.get("/", ordersController.index);
 ordersRoutes.patch("/:id", ordersController.update);
 ordersRoutes.delete("/:id", ordersController.delete);
