@@ -26,7 +26,6 @@ class OrderItemsController {
     return response.json();
 }
 
-
 }
 
 module.exports = OrderItemsController;

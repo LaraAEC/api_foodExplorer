@@ -25,9 +25,9 @@ class OrdersController {
     }
 
     async show(request, response) {
-        const user_id = request.params;
+        const user_id = request.params.id;
 
-        const orderAll = await knex("order_items")
+        const orderUser = await knex("order_items")
         .select([
             "orders.id",
             "orders.created_at",
@@ -39,7 +39,7 @@ class OrdersController {
         .orderBy("created_at")
         .groupBy("order_id");
 
-        const orderWithItem = await Promise.all(orderAll.map(async order => {
+        const orderWithItem = await Promise.all(orderUser.map(async order => {
             const items = await knex("order_items")
                 .select([
                     "dishes.title as dish_title",
