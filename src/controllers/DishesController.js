@@ -114,39 +114,45 @@ class DishesController {
   }
 
   //Lista todos os pratos existentes
-  async index (request, response) {
+  async index(request, response) {
     const { title, ingredients } = request.query;
-
+  
     let dishes;
-
-    const filterIngredients = ingredients.split(',').map(ingredient => ingredient.trim());
+  
+    const filterIngredients = ingredients
+      .split(',')
+      .map(ingredient => ingredient.trim());
+    
     const allIngredients = await knex("ingredients").select("*");
     const ingredientNames = allIngredients.map(item => item.name);
-
-    const ingredientExists = filterIngredients.every(nameIngredient => ingredientNames.includes(nameIngredient));
-
+  
+    const ingredientExists = filterIngredients.some(nameIngredient =>
+      ingredientNames.some(ingredientName =>
+        ingredientName.toUpperCase() === nameIngredient.toUpperCase()
+      )
+    );
+  
     if (ingredientExists) {
-      
       dishes = await knex("ingredients")
-      .select([
-        "dishes.id",
-        "dishes.title",
-        "dishes.description",
-        "dishes.photo",
-        "dishes.price",
-        "dishes.category"
-      ])
-      .whereIn("name", filterIngredients)
-      .innerJoin("dishes", "dishes.id", "ingredients.dish_id" )
-      .groupBy("dishes.id") 
-      .orderBy("dishes.title")
-    } else if(!ingredientExists && title) {
+        .select([
+          "dishes.id",
+          "dishes.title",
+          "dishes.description",
+          "dishes.photo",
+          "dishes.price",
+          "dishes.category"
+        ])
+        .whereIn(knex.raw('UPPER(name)'), filterIngredients.map(ingredient => ingredient.toUpperCase()))
+        .innerJoin("dishes", "dishes.id", "ingredients.dish_id" )
+        .groupBy("dishes.id") 
+        .orderBy("dishes.title")
+    } else if (!ingredientExists && title) {
       dishes = await knex("dishes").select("*")
-      .whereLike("title", `%${title}%`)
-      .orderBy("title")
+        .whereRaw('UPPER(title) LIKE ?', `%${title.toUpperCase()}%`)
+        .orderBy("title")
     } else {
       dishes = await knex("dishes").select("*")
-      .orderBy("title")
+        .orderBy("title")
     }
 
     const fullIngredients = await knex("ingredients").select("*"); 
