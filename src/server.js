@@ -1,19 +1,19 @@
-require("express-async-errors"); //importada antes de tudo,biblioteca que lida com erros
+require("express-async-errors"); 
+require("dotenv/config");
 
 const AppError = require("./utils/AppError");
 
 const uploadConfig = require("./configs/upload");
 
-
 const cors = require("cors");
 const express = require("express");
 const routes = require("./routes");
 
-const app = express(); //inicializando o express nessa outra constante, com os parênteses. Instanciando minha biblioteca super importante.
+const app = express();
 
-app.use(cors()); //para que o backend se integre com o frontend
+app.use(cors());
 
-app.use(express.json()); //colocando o express para usar json()
+app.use(express.json()); 
 
 app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER)); //buscando pelo que está dentro da pasta de uploads, na rota /files busco isso através do método static do express
 
@@ -37,5 +37,5 @@ app.use((error, request, response, next) => { //Capturando o erro, a requisiçã
 });
 
 
-const PORT = 2222;
+const PORT = process.env.PORT || 2222;
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
