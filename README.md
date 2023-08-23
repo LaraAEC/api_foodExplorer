@@ -149,24 +149,49 @@ This controller is responsible for handling the creation of new users, ensuring 
 
 # Technologies Used
 - NodeJs
-- Express
+- JavaScript
 - RESTful API
-- Knex
 - Relational Database (SQLite)
-- Multer 
-- JWT Token
-- Cors
+# Libraries used
+- bcryptjs: 2.4.3
+- cors: 2.8.5
+- dotenv: 16.3.1
+- express: 4.18.2
+- express-async-errors: 3.1.1
+- jsonwebtoken: 9.0.1
+- knex: 2.4.2
+- moment-timezone: 0.5.43
+- multer: 1.4.5-lts.1
+- pm2: 5.3.0
+- sqlite: 4.2.1
+- sqlite3: 5.1.6
+- diskStorage: Um provedor de armazenamento em disco
+- path: Biblioteca para trabalhar com caminhos de arquivo
+- fs: Biblioteca para lidar com a manipulação de arquivos e diretórios
 
+Development dependency:
+- nodemon: To automatically restart the server during development.
 # Usage Guidelines
+- Steps to Run the Project:
+1 - Clone the Repository:
+Open the terminal or command prompt and navigate to the directory where you want to clone the project. Then, execute the command: 'git clone <REPOSITORY_URL_TO_CLONE>'
+2 - Access the Project Directory:
+Use the 'cd' command in the integrated terminal to enter the cloned project directory.
+
+3 - Install Dependencies:
+Ensure that you have Node.js installed on your machine. Run the following command to install the project's dependencies listed in the package.json file: 'npm install'
+
+4 - Configure Environment Variables:
+Set up environment variables as per the .env.example file.
+
+5 - Run the Project:
+In the integrated terminal, run the command: 'npm run dev'
+
 - To install the project dependencies and initiate its functionality, execute the command npm i or yarn i in the terminal. It's important to run this command to ensure that all necessary dependencies are installed correctly.
 
 - To initialize the database tables, run the command "npm run migrate".
 
 - The administrator and the user are identified through the isAdmin logic developed in the backend to be consumed. This logic returns a boolean value; if it's "1," it indicates an administrator, and if it's "0," it signifies a user. This value should already be configured directly in the database, with "1" indicating an administrator role.
-
-- To make requests in insomnia, use the following address in the parameters: http://localhost:2222/"table name," which can be [users, sessions, dishes, requests, items_requests, category, files, favorites], according to the table that will be modified.
-
-# Previews
 
 ## 🔗 Links
 [![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
