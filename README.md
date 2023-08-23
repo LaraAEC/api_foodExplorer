@@ -198,7 +198,6 @@ In the integrated terminal, run the command: 'npm run dev'
 
 ## 🔗 Links
 
-- Deploy:
 [![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
 
 This backend is being kept running by PM2, and it's hosted on Render.
@@ -207,7 +206,7 @@ PM2 (Process Manager 2) is a process manager for Node.js applications that helps
 
 "Render" is a cloud hosting platform that enables easy and efficient deployment and management of web applications and services. It is specifically designed for developers looking to simplify the deployment and management process of their applications, offering a streamlined experience compared to more complex hosting solutions.
 
-- LinKedIn:
+
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/larissa-adler-ewertoncoelho1000)
 
 # Previews
@@ -219,7 +218,7 @@ Here are just a few of the archives of this Application.
 - Auth.js
 ![authjs](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/7bd7dec0-08e5-4383-8cfc-0a4579a67813)
 
-DishesController.js
+- DishesController.js
 ![dishescontroller](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/41b210ee-2b91-4ce0-a28a-c008f8f435bc)
 
 ![dishescontroller2](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/f0d65711-d8d4-4f94-9858-69f788cd381a)
@@ -230,5 +229,5 @@ DishesController.js
 - Upload.js
 ![uploads](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/53488fd9-e827-4fed-a237-a7a9395d96c3)
 
--Index Routes
+- Index Routes
 ![routes](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/35f46e8e-8fa4-4657-8db1-93fd8f0cd53d)
