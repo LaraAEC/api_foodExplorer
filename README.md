@@ -1,149 +1,147 @@
-
 # RocketFood ![restaurant](https://cdn-icons-png.flaticon.com/128/2311/2311475.png)
 A comprehensive application that simulates a virtual restaurant menu. It features two types of personas: the restaurant administrator and the user (customer).
-This frontend application is 
-Sua arquitetura limpa, baseada em Controllers para a realização dos métodos pertinentes às rotas, traz clareza e fácil entendimento.
-Essa API backend foi desenvolvida com o objetivo de ser amplamente consumida por um frontend ou qualquer outra aplicação que deseje acessar as informações armazenadas no banco de dados utilizado.
-Ela consome todos os dados de um Banco de Dados SQLite de modo a entregar as imagens dos pratos, assim como seus dados, descrição, preço, categoria...Entrega, ainda, os dados de seus usuários cadastrados, bem como faz o cadastro de seus usuários e dos pratos desejados pelo administrador do restaurante. 
+This frontend application is built on Clean Architecture, with Controllers handling relevant route methods, providing clarity and easy understanding.
+This backend API was developed to be widely consumed by a frontend or any other application that wishes to access the information stored in the used database.
+It retrieves all data from a SQLite Database to deliver dish images, as well as their details, description, price, category, etc. It also provides information about registered users and allows registration of both users and dishes by the restaurant administrator.
 
-## Fundamentos
-- Lógica de Negócios: Contém toda a lógica de negócios da necessária para entregar as informações solicitadas pelo Frontend. Isso inclui processar dados, executar cálculos, aplicar regras de negócios e determinar como os diferentes componentes da aplicação interagem entre si.
+## Fundamentals
+- Business Logic: Contains all the necessary business logic to deliver the information requested by the frontend. This includes processing data, performing calculations, applying business rules, and determining how different application components interact with each other.
 
-- Gerenciamento de Dados: Gerencia o acesso aos dados do aplicativo, através de um banco de dados SQLite. Entregando consultas, atualizações, inserções e exclusões de dados.
+- Data Management: Manages access to application data through a SQLite database. It handles data queries, updates, inserts, and deletes.
 
-- Validação de Dados: Esta API deve valida os dados de entrada para garantir que eles estejam corretos, coerentes e seguros através do SessionsController.
+- Data Validation: This API validates incoming data to ensure correctness, consistency, and security through the SessionsController.
 
-- Autenticação e Autorização: Implementação de sistema de autenticação e autorização para controlar quem pode acessar quais recursos e funcionalidades. Isso devido às duas 'personas' que podem fazer solicitações/requisições na Interface. Isso inclui a geração e validação de tokens de autenticação, verificação de permissões e proteção contra acessos não autorizados através de Middleware.
+- Authentication and Authorization: Implements an authentication and authorization system to control who can access which resources and functionalities. This is necessary due to the two personas that can make requests in the interface. This includes generating and validating authentication tokens, checking permissions, and protecting against unauthorized access through Middleware.
 
-- Formatação de Respostas: Formata as respostas em JSON. Ela também define os códigos de status HTTP apropriados para indicar o resultado da solicitação.
+- Response Formatting: Formats responses in JSON. It also sets appropriate HTTP status codes to indicate the outcome of the request.
 
-- Tratamento de Erro: Facilitação nos erros com a classe chamada AppError, que é usada para criar objetos de erro personalizados. 
+- Error Handling: Facilitates error handling with the AppError class, used to create custom error objects.
 
-- Roteamento e Endpoints: Define rotas e endpoints claros para diferentes recursos e funcionalidades. Cada endpoint corresponde a um recurso específico e é responsável por lidar com solicitações relacionadas a esse recurso.
+- Routing and Endpoints: Defines clear routes and endpoints for different resources and functionalities. Each endpoint corresponds to a specific resource and is responsible for handling requests related to that resource.
 
-- Logs: Código devidamente versionado com o GIT para rastreamento de atividades e diagnosticar possíveis problemas.
+- Logs: Code is properly versioned using GIT for activity tracking and diagnosing potential issues.
 
-- Segurança: Proteção dos dados através da utilização de variáveis de ambiente, arquivo '.env'.
+- Security: Data protection through the use of environment variables, the '.env' file.
 
-# Funcionalidades e Controllers:
-Aplicação Backend baseada no acolhimento das rotas pelos Controllers. Cada rota leva a um controller diferente, isso de acordo com o que foi solicitado via requisição HTTP do frontend.
-E, através dos Controllers trabalham-se as regras de negócio, o tratamento dos dados e a devolução das respostas adequadas.
-Dentro de cada Controller respeitou-se as operações básicas do acrônimo 'CRUD', havendo no máximo 5 métodos em cada Controller, sem repetição de método, a fim de alcançar um código bem estruturado.
+# Features and Controllers:
+Backend application based on route handling by Controllers. Each route leads to a different controller, depending on what was requested via the frontend's HTTP request.
+Through the Controllers, business rules are managed, data is processed, and appropriate responses are returned.
+Within each Controller, the basic CRUD operations are respected, with a maximum of 5 methods in each Controller, without method repetition, to achieve well-structured code.
 
 ## DishesController:
-Gerencia as operações relacionadas a pratos em uma aplicação. As operações incluem criar, mostrar detalhes, atualizar e deletar pratos, além de listar pratos existentes com filtros de pesquisa.
+Manages operations related to dishes in an application. Operations include creating, showing details, updating, and deleting dishes, as well as listing existing dishes with search filters.
 
-- Criação de Prato:
-Aceita uma requisição HTTP POST com informações do prato, incluindo título, descrição, preço, categoria, ingredientes e foto.
-Salva a imagem usando um provedor de armazenamento em disco.
-Insere os detalhes do prato e seus ingredientes no banco de dados.
+- Dish Creation:
+Accepts an HTTP POST request with dish information, including title, description, price, category, ingredients, and photo.
+Saves the image using a disk storage provider.
+Inserts dish details and its ingredients into the database.
 
-- Mostrar Detalhes do Prato:
-Aceita uma requisição HTTP GET com o ID do prato.
-Recupera os detalhes do prato e seus ingredientes correspondentes do banco de dados.
-Retorna os detalhes do prato, incluindo seus ingredientes, como uma resposta JSON.
+- Show Dish Details:
+Accepts an HTTP GET request with the dish's ID.
+Retrieves the dish's details and its corresponding ingredients from the database.
+Returns the dish's details, including its ingredients, as a JSON response.
 
-- Atualização de Prato:
-Aceita uma requisição HTTP PUT com o ID do prato e informações atualizadas.
-Atualiza os detalhes do prato no banco de dados, incluindo a possibilidade de atualizar a imagem.
-Atualiza os ingredientes associados ao prato.
+- Dish Update:
+Accepts an HTTP PUT request with the dish's ID and updated information.
+Updates the dish's details in the database, including the ability to update the image.
+Updates ingredients associated with the dish.
 
-- Exclusão de Prato:
-Aceita uma requisição HTTP DELETE com o ID do prato.
-Remove o prato do banco de dados.
+- Dish Deletion:
+Accepts an HTTP DELETE request with the dish's ID.
+Removes the dish from the database.
 
-- Listagem de Pratos:
-Aceita uma requisição HTTP GET para listar pratos.
-Aceita parâmetros de consulta para filtrar por título e/ou ingredientes.
-Retorna uma lista de pratos do banco de dados, possivelmente filtrada por título ou ingredientes.
-Inclui detalhes de ingredientes para cada prato na resposta JSON.
+- List Dishes:
+Accepts an HTTP GET request to list dishes.
+Accepts query parameters to filter by title and/or ingredients.
+Returns a list of dishes from the database, possibly filtered by title or ingredients.
+Includes ingredient details for each dish in the JSON response.
 
-O controlador utiliza a biblioteca Knex para interagir com o banco de dados, além de um provedor de armazenamento em disco para gerenciar as imagens dos pratos. Ele também lida com alguns cenários específicos, como atualização de ingredientes e busca de pratos com base em ingredientes.
+The controller uses the Knex library to interact with the database, as well as a disk storage provider to manage dish images. It also handles specific scenarios, such as ingredient updates and dish retrieval based on ingredients.
 
 ## FavoritesController:
-Lida com operações relacionadas a favoritos de pratos em uma aplicação. Ele tem funções para criar, listar, mostrar detalhes e remover pratos favoritos para um usuário específico.
+Handles operations related to favorite dishes in an application. It has functions to create, list, show details, and remove favorite dishes for a specific user.
 
-- Create: Cria um novo favorito para um prato. Ele verifica se o usuário existe, se o prato existe e, em seguida, insere um registro na tabela de favoritos.
+- Create: Creates a new favorite for a dish. It checks if the user exists, if the dish exists, and then inserts a record in the favorites table.
 
-- index: Lista todos os pratos favoritos de um usuário. Ele junta as tabelas de favoritos e pratos usando um INNER JOIN e retorna uma lista de pratos favoritos do usuário.
+- Index: Lists all favorite dishes for a user. It joins the favorites and dishes tables using an INNER JOIN and returns a list of the user's favorite dishes.
 
-- show: Mostra os detalhes de um prato favorito específico do usuário. Ele combina as tabelas de favoritos e pratos usando um INNER JOIN e retorna os detalhes do prato favorito solicitado.
+- Show: Shows details of a specific favorite dish for the user. It combines the favorites and dishes tables using an INNER JOIN and returns the details of the requested favorite dish.
 
-- delete: Remove um prato favorito específico pelo ID do prato.
+- Delete: Removes a specific favorite dish by dish ID.
 
-Este controlador usa a biblioteca Knex para interagir com o banco de dados e também verifica a existência do usuário e do prato antes de executar as operações. Ele fornece uma interface para gerenciar a coleção de pratos favoritos de um usuário.
+This controller uses the Knex library to interact with the database and also checks for the existence of the user and the dish before performing operations. It provides an interface to manage a user's collection of favorite dishes.
 
 ## IngredientsController:
-Responsável por lidar com operações relacionadas aos ingredientes de um prato. Ele tem uma função chamada index que lista os ingredientes de um prato específico.
+Responsible for handling operations related to a dish's ingredients. It has a function called "index" that lists the ingredients of a specific dish.
 
-- index: Aceita uma requisição HTTP GET com o dish_id (ID do prato) como parâmetro nos parâmetros da requisição. Ele usa o dish_id para buscar os ingredientes relacionados a esse prato no banco de dados. Os ingredientes são obtidos usando o método where com base no dish_id e, em seguida, agrupados pelo nome usando o groupBy.
+- Index: Accepts an HTTP GET request with the dish_id (dish ID) as a parameter in the request parameters. It uses the dish_id to fetch ingredients related to that dish in the database. Ingredients are obtained using the "where" method based on dish_id, and then grouped by name using "groupBy."
 
-Retorna uma resposta JSON contendo a lista de ingredientes.
+Returns a JSON response containing the list of ingredients.
 
-O controlador utiliza a biblioteca Knex para interagir com o banco de dados e, neste caso, a função index é usada para obter a lista de ingredientes associados a um prato específico.
+The controller uses the Knex library to interact with the database, and in this case, the "index" function is used to get the list of ingredients associated with a specific dish.
 
 ## OrderItemsController:
-Responsável por lidar com a criação de itens de pedido em uma aplicação. Ele aceita um conjunto de itens e um ID de pedido e insere esses itens na tabela de itens de pedido.
+Responsible for handling the creation of order items in an application. It accepts a set of items and an order ID and inserts these items into the order items table.
 
-- create: Aceita uma requisição HTTP POST com o corpo da requisição contendo os items (itens de pedido) e o order_id (ID do pedido) que o pedido pertence.
-Ele verifica se o pedido com o ID fornecido existe na tabela de pedidos.
-Caso o pedido não exista, ele lança um erro utilizando a classe AppError.
-Mapeia os items recebidos para o formato que será inserido na tabela de itens de pedido.
-Insere os itens na tabela de order_items.
-É responsável por receber os itens de um pedido e associá-los ao pedido específico na tabela de order_items. Ele verifica a existência do pedido e depois insere os itens no banco de dados.
+- Create: Accepts an HTTP POST request with the request body containing the items (order items) and the order_id (order ID) to which the order belongs.
+Checks if the order with the provided ID exists in the orders table.
+If the order doesn't exist, it throws an error using the AppError class.
+Maps the received items to the format that will be inserted into the order items table.
+Inserts the items into the order_items table.
+Responsible for receiving the items from an order and associating them with the specific order in the order_items table. It checks for the existence of the order and then inserts the items into the database.
 
 ## OrdersController:
- Responsável por lidar com operações relacionadas a pedidos em uma aplicação. Ele abrange funções para criar, mostrar detalhes, listar, atualizar e deletar pedidos.
+Responsible for handling operations related to orders in an application. It covers functions to create, show details, list, update, and delete orders.
 
-- create: Cria um novo pedido para um usuário. Ele verifica se o usuário está logado, obtém o horário atual em São Paulo (usando a biblioteca moment-timezone) e insere um novo pedido com o ID do usuário e as datas de criação/atualização.
+- Create: Creates a new order for a user. It checks if the user is logged in, gets the current time in São Paulo (using the moment-timezone library), and inserts a new order with the user's ID and creation/update dates.
 
-- show: Mostra detalhes dos pedidos de um usuário específico. Ele junta as tabelas de pedidos e itens de pedido usando INNER JOIN e retorna detalhes dos pedidos, incluindo os itens relacionados.
+- Show: Shows details of orders for a specific user. It joins the orders and order items tables using INNER JOIN and returns details of the orders, including related items.
 
-- index: Lista todos os pedidos existentes com detalhes dos itens. Ele junta as tabelas de pedidos e itens de pedido usando INNER JOIN e retorna detalhes de todos os pedidos, incluindo os itens relacionados.
+- Index: Lists all existing orders with item details. It joins the orders and order items tables using INNER JOIN and returns details of all orders, including related items.
 
-- update: Atualiza o status de um pedido específico. Ele verifica se o pedido existe e atualiza o status.
+- Update: Updates the status of a specific order. It checks if the order exists and updates the status.
 
-- delete: Remove um pedido específico pelo ID do pedido.
+- Delete: Removes a specific order by order ID.
 
-Lida com todas as operações relacionadas a pedidos e seus itens associados. Ele utiliza a biblioteca Knex para interagir com o banco de dados e a biblioteca moment-timezone para manipular datas e horários em diferentes fusos horários.
+Handles all operations related to orders and their associated items. It uses the Knex library to interact with the database and the moment-timezone library to handle dates and times in different time zones.
 
 ## SessionsController:
-Responsável por lidar com operações relacionadas à autenticação e criação de sessões de usuário.
+Responsible for handling operations related to user authentication and session creation.
 
-- create: Cria uma nova sessão de usuário (login). Ele recebe o e-mail e senha do corpo da requisição.
-Verifica se um usuário com o e-mail fornecido existe no banco de dados.
-- Se o usuário não existir, lança um erro usando a classe AppError.
-- Compara a senha fornecida com a senha criptografada do usuário usando o método compare do bcryptjs.
-- Se a senha não coincidir, lança um erro usando a classe AppError.
-- Obtém a chave secreta e o tempo de expiração do token a partir das configurações de autenticação.
-- Cria um token JWT assinado contendo o ID do usuário como conteúdo e tempo de expiração.
-Retorna o usuário e o token como resposta.
+- Create: Creates a new user session (login). It receives the email and password from the request body.
+Checks if a user with the provided email exists in the database.
+- If the user doesn't exist, it throws an error using the AppError class.
+- Compares the provided password with the user's hashed password using the "compare" method of bcryptjs.
+- If the password doesn't match, it throws an error using the AppError class.
+- Gets the secret key and token expiration time from the authentication settings.
+- Creates a signed JWT token containing the user's ID as the content and expiration time.
+Returns the user and token as a response.
 
-Esse controlador é responsável por autenticar os usuários, comparando suas senhas criptografadas e gerando tokens JWT para as sessões ativas. Ele utiliza a biblioteca Knex para interagir com o banco de dados, a biblioteca bcryptjs para comparar senhas criptografadas e a biblioteca jsonwebtoken para criar e assinar tokens JWT.
+This controller is responsible for authenticating users, comparing their hashed passwords, and generating JWT tokens for active sessions. It uses the Knex library to interact with the database, the bcryptjs library to compare hashed passwords, and the jsonwebtoken library to create and sign JWT tokens.
 
 ## UsersController:
-Responsável por lidar com operações relacionadas aos usuários, como criar e atualizar informações do usuário.
+Responsible for handling operations related to users, such as creating and updating user information.
 
-- create: Cria um novo usuário.
+- Create: Creates a new user.
 
-Verifica se um usuário com o e-mail fornecido já existe no banco de dados.
-Se o usuário já existir, lança um erro.
-Criptografa a senha fornecida usando hash do bcryptjs.
-Insere o novo usuário no banco de dados.
-Retorna um status 201 (Created) como resposta.
+Checks if a user with the provided email already exists in the database.
+If the user already exists, it throws an error.
+Encrypts the provided password using bcryptjs hash.
+Inserts the new user into the database.
+Returns a status 201 (Created) as a response.
 
-- update: Atualiza as informações do usuário.
-Obtém o ID do usuário autenticado.
-Busca o usuário pelo ID.
-Verifica se outro usuário já possui o e-mail atualizado e lança um erro, se necessário.
-Atualiza o nome e o e-mail do usuário, se fornecidos.
-Verifica se a nova senha foi fornecida sem a senha antiga e lança um erro, se necessário.
-Compara a senha antiga fornecida com a senha atual do usuário.
-Se a senha antiga coincidir, criptografa a nova senha usando hash do bcryptjs.
-Atualiza os dados do usuário no banco de dados.
-Retorna um status 201 (Created) como resposta.
+- Update: Updates user information.
+Gets the ID of the authenticated user.
+Fetches the user by ID.
+Checks if another user already has the updated email and throws an error if necessary.
+Updates the user's name and email if provided.
+Checks if the new password was provided without the old password and throws an error if necessary.
+Compares the provided old password with the user's current password.
+If the old password matches, encrypts the new password using bcryptjs hash.
+Updates the user's data in the database.
+Returns a status 201 (Created) as a response.
 
-Este controlador é responsável por lidar com a criação de novos usuários, garantindo que os e-mails sejam únicos e criptografando as senhas. Também lida com a atualização das informações do usuário, incluindo a possibilidade de atualizar a senha com verificação da senha antiga.
+This controller is responsible for handling the creation of new users, ensuring that emails are unique, and encrypting passwords. It also handles updating user information, including the ability to update the password with verification of the old password.
 
 # Code Versioning
 - Git
@@ -152,9 +150,9 @@ Este controlador é responsável por lidar com a criação de novos usuários, g
 # Technologies Used
 - NodeJs
 - Express
-- API RESTfull
+- RESTful API
 - Knex
-- Database relational (SQLite)
+- Relational Database (SQLite)
 - Multer 
 - JWT Token
 - Cors
@@ -162,20 +160,14 @@ Este controlador é responsável por lidar com a criação de novos usuários, g
 # Usage Guidelines
 - To install the project dependencies and initiate its functionality, execute the command npm i or yarn i in the terminal. It's important to run this command to ensure that all necessary dependencies are installed correctly.
 
-- Para inicializar as tabelas do banco de dados execute o comando "npm run migrate".
+- To initialize the database tables, run the command "npm run migrate".
 
 - The administrator and the user are identified through the isAdmin logic developed in the backend to be consumed. This logic returns a boolean value; if it's "1," it indicates an administrator, and if it's "0," it signifies a user. This value should already be configured directly in the database, with "1" indicating an administrator role.
 
--Para realizar as requisições no insomnia é necessário usar nos parâmetros o seguinte endereço, http://localhost:2222/"nome da tabela" podendo ser [users, sessions, dishes, requests, items_requests, category, files, favorites] de acordo com a tabela que será feita a modificação.
+- To make requests in insomnia, use the following address in the parameters: http://localhost:2222/"table name," which can be [users, sessions, dishes, requests, items_requests, category, files, favorites], according to the table that will be modified.
 
 # Previews
-
-
-
-
 
 ## 🔗 Links
 [![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/larissa-adler-ewertoncoelho1000)
-
-
