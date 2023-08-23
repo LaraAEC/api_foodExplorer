@@ -152,6 +152,7 @@ This controller is responsible for handling the creation of new users, ensuring 
 - JavaScript
 - RESTful API
 - Relational Database (SQLite)
+
 # Libraries used
 - bcryptjs: 2.4.3
 - cors: 2.8.5
@@ -196,5 +197,38 @@ Set up environment variables as per the .env.example file.
 In the integrated terminal, run the command: 'npm run dev'
 
 ## 🔗 Links
+
+- Deploy:
 [![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
+
+This backend is being kept running by PM2, and it's hosted on Render.
+
+PM2 (Process Manager 2) is a process manager for Node.js applications that helps in managing and maintaining the execution of Node.js processes. It ensures that your Node.js applications run continuously and are automatically restarted in case of crashes or failures. PM2 provides features like process monitoring, load balancing, automatic restarts, logging, and more, making it suitable for deploying and managing Node.js applications in production environments.
+
+"Render" is a cloud hosting platform that enables easy and efficient deployment and management of web applications and services. It is specifically designed for developers looking to simplify the deployment and management process of their applications, offering a streamlined experience compared to more complex hosting solutions.
+
+- LinKedIn:
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/larissa-adler-ewertoncoelho1000)
+
+# Previews
+Here are just a few of the archives of this Application.
+
+- Migrations: createUsers.js
+![migrations](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/95418b76-7323-48a2-900b-23fb98a536e7)
+
+- Auth.js
+![authjs](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/7bd7dec0-08e5-4383-8cfc-0a4579a67813)
+
+DishesController.js
+![dishescontroller](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/41b210ee-2b91-4ce0-a28a-c008f8f435bc)
+
+![dishescontroller2](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/f0d65711-d8d4-4f94-9858-69f788cd381a)
+
+- OrdersController.js
+![orderscontroller](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/c38326bd-f6d7-46e7-9ec1-e4db2ec292db)
+
+- Upload.js
+![uploads](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/53488fd9-e827-4fed-a237-a7a9395d96c3)
+
+-Index Routes
+![routes](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/35f46e8e-8fa4-4657-8db1-93fd8f0cd53d)

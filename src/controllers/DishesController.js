@@ -35,7 +35,6 @@ class DishesController {
     await knex("ingredients").insert(ingredientsInsert); //Passando para minha tabela Ingredientes, os ingredientes inseridos.
 
     return response.json();
-
   }
 
   //Mostra detalhes do prato selecionado
