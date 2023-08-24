@@ -1,10 +1,10 @@
-# RocketFood ![restaurant](https://cdn-icons-png.flaticon.com/128/2311/2311475.png)
+# ![restaurant](https://cdn-icons-png.flaticon.com/128/2311/2311475.png)RocketFood
 A comprehensive application that simulates a virtual restaurant menu. It features two types of personas: the restaurant administrator and the user (customer).
 This frontend application is built on Clean Architecture, with Controllers handling relevant route methods, providing clarity and easy understanding.
 This backend API was developed to be widely consumed by a frontend or any other application that wishes to access the information stored in the used database.
 It retrieves all data from a SQLite Database to deliver dish images, as well as their details, description, price, category, etc. It also provides information about registered users and allows registration of both users and dishes by the restaurant administrator.
 
-## Fundamentals
+# 🧩 Fundamentals
 - Business Logic: Contains all the necessary business logic to deliver the information requested by the frontend. This includes processing data, performing calculations, applying business rules, and determining how different application components interact with each other.
 
 - Data Management: Manages access to application data through a SQLite database. It handles data queries, updates, inserts, and deletes.
@@ -23,7 +23,7 @@ It retrieves all data from a SQLite Database to deliver dish images, as well as 
 
 - Security: Data protection through the use of environment variables, the '.env' file.
 
-# Features and Controllers:
+# 🎮 Features and Controllers:
 Backend application based on route handling by Controllers. Each route leads to a different controller, depending on what was requested via the frontend's HTTP request.
 Through the Controllers, business rules are managed, data is processed, and appropriate responses are returned.
 Within each Controller, the basic CRUD operations are respected, with a maximum of 5 methods in each Controller, without method repetition, to achieve well-structured code.
@@ -143,17 +143,17 @@ Returns a status 201 (Created) as a response.
 
 This controller is responsible for handling the creation of new users, ensuring that emails are unique, and encrypting passwords. It also handles updating user information, including the ability to update the password with verification of the old password.
 
-# Code Versioning
+# 🐱 Code Versioning
 - Git
 - Github
 
-# Technologies Used
+#  🚀 Technologies Used
 - NodeJs
 - JavaScript
 - RESTful API
 - Relational Database (SQLite)
 
-# Libraries used
+# 📚 Libraries used
 - bcryptjs: 2.4.3
 - cors: 2.8.5
 - dotenv: 16.3.1
@@ -172,7 +172,7 @@ This controller is responsible for handling the creation of new users, ensuring 
 
 Development dependency:
 - nodemon: To automatically restart the server during development.
-# Usage Guidelines
+# 🧭 Usage Guidelines
 - To install the project dependencies and initiate its functionality, execute the command npm i or yarn i in the terminal. It's important to run this command to ensure that all necessary dependencies are installed correctly.
 
 - To initialize the database tables, run the command "npm run migrate".
@@ -209,7 +209,7 @@ PM2 (Process Manager 2) is a process manager for Node.js applications that helps
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/larissa-adler-ewertoncoelho1000)
 
-# Previews
+# ⏯️ Previews
 Here are just a few of the archives of this Application.
 
 - Migrations: createUsers.js
@@ -221,6 +221,7 @@ Here are just a few of the archives of this Application.
 - DishesController.js
 ![dishescontroller](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/41b210ee-2b91-4ce0-a28a-c008f8f435bc)
 
+- DishesController.js
 ![dishescontroller2](https://github.com/LaraAEC/api_foodExplorer/assets/91379960/f0d65711-d8d4-4f94-9858-69f788cd381a)
 
 - OrdersController.js
