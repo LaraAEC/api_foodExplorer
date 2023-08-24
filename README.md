@@ -197,15 +197,13 @@ Set up environment variables as per the .env.example file.
 In the integrated terminal, run the command: 'npm run dev'
 
 # 🔗 Links
-
-[![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
-
 This backend is being kept running by PM2, and it's hosted on Render.
 
 PM2 (Process Manager 2) is a process manager for Node.js applications that helps in managing and maintaining the execution of Node.js processes. It ensures that your Node.js applications run continuously and are automatically restarted in case of crashes or failures. PM2 provides features like process monitoring, load balancing, automatic restarts, logging, and more, making it suitable for deploying and managing Node.js applications in production environments.
 
 "Render" is a cloud hosting platform that enables easy and efficient deployment and management of web applications and services. It is specifically designed for developers looking to simplify the deployment and management process of their applications, offering a streamlined experience compared to more complex hosting solutions.
 
+[![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/larissa-adler-ewertoncoelho1000)
 
