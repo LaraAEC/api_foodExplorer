@@ -196,7 +196,7 @@ Set up environment variables as per the .env.example file.
 5 Run the Project:
 In the integrated terminal, run the command: 'npm run dev'
 
-## 🔗 Links
+# 🔗 Links
 
 [![deploy](https://img.shields.io/badge/deploy-00BFFF?style=for-the-badge&logo=cloud&logoColor=white)](https://rocketfood-api-im2b.onrender.com)
 
