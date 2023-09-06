@@ -1,6 +1,6 @@
 # ![restaurant](https://cdn-icons-png.flaticon.com/128/2311/2311475.png)RocketFood
 A comprehensive application that simulates a virtual restaurant menu. It features two types of personas: the restaurant administrator and the user (customer).
-This frontend application is built on Clean Architecture, with Controllers handling relevant route methods, providing clarity and easy understanding.
+This backend application is built on Clean Architecture, with Controllers handling relevant route methods, providing clarity and easy understanding.
 This backend API was developed to be widely consumed by a frontend or any other application that wishes to access the information stored in the used database.
 It retrieves all data from a SQLite Database to deliver dish images, as well as their details, description, price, category, etc. It also provides information about registered users and allows registration of both users and dishes by the restaurant administrator.
 
